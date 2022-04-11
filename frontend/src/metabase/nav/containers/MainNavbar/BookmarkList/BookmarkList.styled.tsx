@@ -15,6 +15,7 @@ export const SidebarBookmarkItem = styled(SidebarLink)<SidebarBookmarkItem>`
 
   &:hover {
     button {
+      color: ${color("brand")};
       opacity: 0.5;
     }
   }
