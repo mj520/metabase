@@ -122,7 +122,7 @@ describeEE("formatting > whitelabel", () => {
       cy.findByText("Metabase is up and running.").should("not.exist");
     });
 
-    it.skip("should not show the old name in the admin panel (metabase#17043)", () => {
+    it("should not show the old name in the admin panel (metabase#17043)", () => {
       cy.reload();
 
       cy.findByDisplayValue(COMPANY_NAME);

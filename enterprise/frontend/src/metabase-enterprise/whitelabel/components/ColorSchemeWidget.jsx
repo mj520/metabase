@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from "react";
 
-import { t } from "ttag";
+import { t, jt } from "ttag";
 
 import ColorPicker from "metabase/components/ColorPicker";
 import Icon from "metabase/components/Icon";
@@ -50,6 +50,10 @@ const COLOR_DISPLAY_PROPERTIES = {
 };
 
 const ColorSchemeWidget = ({ setting, onChange }) => {
+  // Disable translation, because it's needed
+  // only for whitelabel name replacement.
+  // See metabase#17043
+  /* disable ttag */
   const value = setting.value || {};
   const colors = { ...originalColors, ...value };
 
@@ -83,7 +87,7 @@ const ColorSchemeWidget = ({ setting, onChange }) => {
                 </td>
                 <td>
                   <span className="mx2 text-grey-4">
-                    {properties.description}
+                    {jt`${properties.description}`}
                   </span>
                 </td>
               </tr>
