@@ -81,3 +81,20 @@
       (is (= "Run daily at 12 AM UTC"
              (@#'messages/alert-schedule-text {:schedule_type :daily
                                                :schedule_hour 0}))))))
+
+(deftest render-pulse-email-test
+  (testing "Email with few rows and columns can be rendered when tracing"
+    (let [logger-name (namespace ::messages/whatever)
+          logger (org.apache.logging.log4j.LogManager/getLogger logger-name)
+          log-level (.getLevel logger)
+          result {:card {:name "card-name"}
+                  :result {:data {:cols [{:name "x"} {:name "y"}]
+                                  :rows [[0 0]
+                                         [1 1]]}}}]
+      (.setLevel logger org.apache.logging.log4j.Level/TRACE)
+      (try
+        (let [emails (messages/render-pulse-email "America/Pacific" {} {} [result])]
+          (is (vector? emails))
+          (is (map? (first emails))))
+        (finally
+          (.setLevel logger log-level))))))
