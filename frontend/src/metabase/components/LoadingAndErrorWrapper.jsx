@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import LoadingSpinner from "metabase/components/LoadingSpinner";
 import { t } from "ttag";
 import cx from "classnames";
+import { GenericError } from "metabase/containers/ErrorPages";
 
 export default class LoadingAndErrorWrapper extends Component {
   state = {
@@ -117,10 +118,8 @@ export default class LoadingAndErrorWrapper extends Component {
     return (
       <div className={this.props.className} style={this.props.style}>
         {error ? (
-          <div className={contentClassName}>
-            <h2 className="text-normal text-light ie-wrap-content-fix">
-              {this.getErrorMessage()}
-            </h2>
+          <div className="py4">
+            <GenericError details={this.getErrorMessage()} />
           </div>
         ) : loading ? (
           <div className={contentClassName}>
